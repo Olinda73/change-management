@@ -5,16 +5,12 @@
 <head>
 
   <meta charset="UTF-8">
-  <title>CoderBay</title>
+  <title>Sign-Up Today!</title>
 
-  <!-- jQuery -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-  <!-- Bootstrap CDN-->
+  <!-- Bootstrap -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
-  <!-- Firebase Reference -->
+  <!-- LINK TO FIREBASE GOES HERE -->
   <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
 
 </head>
@@ -25,85 +21,139 @@
 
     <br>
 
-    <!-- Jumbotron Title -->
+    <!-- Jumbotron -->
     <div class="jumbotron">
-      <h1 class="text-center">Welcome to CodersBay</h1>
-      <h3 class="text-center">"Where bidders win big."</h3>
+      <h1 class="text-center">Sign-Up Today!</h1>
     </div>
 
     <div class="row">
-      <div class="col-lg-12">
+
+      <!-- Sign-Up Card-->
+      <div class="col-lg-6">
         <div class="card card-default">
+          <div class="card-header">
+            New Member Sign-Up
+          </div>
           <div class="card-body">
-            <h3 class="text-center">
-              <strong>Today's Sale</strong>: Pure Vegetarian-Based Coding Knowledge (Chewable)</h3>
+
+            <!-- Sign-up Form (note the various input "types")-->
+
+            <form role="form">
+              <div class="form-group row">
+                <label for="name-input">Name:</label>
+                <input class="form-control" id="name-input" type="text">
+              </div>
+              <div class="form-group row">
+                <label for="email-input">Email:</label>
+                <input class="form-control" id="email-input" type="email">
+              </div>
+              <div class="form-group row">
+                <label for="age-input">Age:</label>
+                <input class="form-control" id="age-input" type="number">
+              </div>
+              <div class="form-group row">
+                <label for="comment-input">How did you hear about us?</label>
+                <textarea class="form-control" rows="5" id="comment-input"></textarea>
+              </div>
+              <button class="btn btn-default" id="add-user" type="submit">Submit</button>
+            </form>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Most Recent Member card -->
+      <div class="col-lg-6">
+        <div class="card card-default">
+          <div class="card-header">
+            Most Recent Member
+          </div>
+          <div class="card-body" id="recent-member">
+            <h2 id="name-display"></h2>
+            <h4 id="email-display"></h4>
+            <h4 id="age-display"></h4>
+            <p id="comment-display"></p>
           </div>
         </div>
       </div>
-    </div>
-  </div>
 
-  <!-- Current Product -->
-  <div class="row">
-    <div class="col-lg-12">
-      <div class="card card-default">
-        <div class="card-body">
-          <div class="row">
-            <div class="col-sm-4 col-sm-offset-2">
-              <img class="img-fluid thumbnail center-block" src="http://graphitepublications.com/wp-content/uploads/2015/04/5-Coding-Challenges-to-Help-You-Train-Your-Brain.jpg"
-                alt="Coding Brain">
-            </div>
-            <div class="col-sm-6">
-              <h3 class="">
-                <strong>Highest Bidder:</strong>
-                <span id="highest-bidder"></span>
-              </h3>
-              <h3 class="">
-                <strong>Current Price:</strong>
-                <span id="highest-price"></span>
-              </h3>
-              <hr>
-              <h3 class="">Hurry!
-                <strong>
-                  <span id="connected-viewers"></span>
-                </strong> people have their eyes on the prize.</h3>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
-  </div>
-  </div>
-
-  <!-- Make Your Bid -->
-  <div class="row">
-    <div class="col-lg-12">
-      <div class="card card-default">
-        <div class="card-header">
-          Make Your Bid
-        </div>
-        <div class="card-body">
-          <form>
-            <div class="form-group row">
-              <label for="bidder-name">Your Name</label>
-              <input class="form-control" id="bidder-name" type="text">
-            </div>
-            <div class="form-group row">
-              <label for="bidder-price">Your Price</label>
-              <input class="form-control" id="bidder-price" type="number">
-            </div>
-            <button class="btn btn-primary" id="submit-bid" type="submit">Submit</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-  </div>
 
   </div>
+
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery.js"></script>
 
   <!-- Script -->
-  <script src="logic.js"></script>
+  <script>
+    // ========================================== START CODING BELOW!!
+
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyCanlYIc7n-Wel8wDeaMxMzYtViVVCOwpI",
+      authDomain: "recent-user-with-push.firebaseapp.com",
+      databaseURL: "https://recent-user-with-push.firebaseio.com",
+      storageBucket: "recent-user-with-push.appspot.com",
+      messagingSenderId: "208476116054"
+    };
+
+    firebase.initializeApp(config);
+
+    // Create a variable to reference the database.
+    var database = firebase.database();
+
+    // Initial Values
+    var name = "";
+    var email = "";
+    var age = 0;
+    var comment = "";
+
+    // Capture Button Click
+    $("#add-user").on("click", function(event) {
+      event.preventDefault();
+
+      // Grabbed values from text boxes
+      name = $("#name-input").val().trim();
+      email = $("#email-input").val().trim();
+      age = $("#age-input").val().trim();
+      comment = $("#comment-input").val().trim();
+
+      // Code for handling the push
+      database.ref().push({
+        name: name,
+        email: email,
+        age: age,
+        comment: comment,
+        dateAdded: firebase.database.ServerValue.TIMESTAMP
+      });
+
+    });
+
+    // Firebase watcher .on("child_added"
+    database.ref().on("child_added", function(snapshot) {
+      // storing the snapshot.val() in a variable for convenience
+      var sv = snapshot.val();
+
+      // Console.loging the last user's data
+      console.log(sv.name);
+      console.log(sv.email);
+      console.log(sv.age);
+      console.log(sv.comment);
+
+      // Change the HTML to reflect
+      $("#name-display").text(sv.name);
+      $("#email-display").text(sv.email);
+      $("#age-display").text(sv.age);
+      $("#comment-display").text(sv.comment);
+
+      // Handle the errors
+    }, function(errorObject) {
+      console.log("Errors handled: " + errorObject.code);
+    });
+
+  </script>
 
 </body>
 
