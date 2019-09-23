@@ -5,7 +5,6 @@
 
 firebase.initializeApp(firebaseConfig);
 
-<body></body>
 const firebaseConfig = {
   apiKey: "AIzaSyCFx6EEPuadPlNmiWDpXJZmo5jifmakrhk",
   authDomain: "nbc-changemanagement.firebaseapp.com",
