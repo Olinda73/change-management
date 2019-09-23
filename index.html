@@ -1,45 +1,102 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-us">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Firebase</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-     <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
+
+  <meta charset="UTF-8">
+  <title>CoderBay</title>
+
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+
+  <!-- Bootstrap CDN-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <!-- Firebase Reference -->
+  <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
+
 </head>
+
 <body>
-    <div class="row">
-        <div class="container">
-            <h2>Contact Form</h2>
-            <div class="alert alert-success success-message" style="display:none;">Form submitted successfully.</div>
-            <form id="contactForm">
-                <div class="form-group">
-                    <label for="exampleFullName">Full Name</label>
-                    <input type="text" class="form-control fullname" id="exampleFullName" placeholder="Enter Full Name" required>
-                </div>
-                <div class="form-group">
-                    <label for="exampleEmail">Email</label>
-                    <input type="email" class="form-control email" id="exampleEmail" placeholder="Enter Email" required>
-                </div>
-                <div class="form-group">
-                    <label for="exampleSubject">Subject</label>
-                    <input type="text" class="form-control subject" id="exampleSubject" placeholder="Enter Subject" required>
-                </div>
-                <div class="form-group">
-                    <label for="exampleMessage">Message</label>
-                    <textarea class="form-control message" id="exampleMessage" placeholder="Enter Message" cols="30" rows="10" required></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
-        </div>
+
+  <div class="container">
+
+    <br>
+
+    <!-- Jumbotron Title -->
+    <div class="jumbotron">
+      <h1 class="text-center">Welcome to CodersBay</h1>
+      <h3 class="text-center">"Where bidders win big."</h3>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase.js"></script>
-    <script src="js/main.js"></script>
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-body">
+            <h3 class="text-center">
+              <strong>Today's Sale</strong>: Pure Vegetarian-Based Coding Knowledge (Chewable)</h3>
+          </div>
+        </div>
+      </div>
+    </div>
 
+    <!-- Current Product -->
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-4 col-sm-offset-2">
+                <img class="img-responsive thumbnail center-block" src="http://graphitepublications.com/wp-content/uploads/2015/04/5-Coding-Challenges-to-Help-You-Train-Your-Brain.jpg"
+                  alt="Coding Brain">
+              </div>
+              <div class="col-sm-6">
+                <h3 class="">
+                  <strong>Highest Bidder:</strong>
+                  <span id="highest-bidder"></span>
+                </h3>
+                <h3 class="">
+                  <strong>Current Price:</strong>
+                  <span id="highest-price"></span>
+                </h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Make Your Bid -->
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-header">
+            Make Your Bid
+          </div>
+          <div class="card-body">
+            <form>
+              <div class="form-group">
+                <label for="bidder-name">Your Name</label>
+                <input class="form-control" id="bidder-name" type="text">
+              </div>
+              <div class="form-group">
+                <label for="bidder-price">Your Price</label>
+                <input class="form-control" id="bidder-price" type="number">
+              </div>
+              <button class="btn btn-primary" id="submit-bid" type="submit">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- JavaScript -->
+  <script src="logic.js"></script>
 
 </body>
+
 </html>
